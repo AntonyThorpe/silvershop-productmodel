@@ -1,28 +1,33 @@
 <?php
+
+namespace AntonyThorpe\SilverShopProductModel;
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\ORM\ArrayLib;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\ORM\DataExtension;
+
 /**
  * Add model dropdown to Product where available
- * @package Product
+ * Extends SilverShop\Page\Product
  */
-class ProductModelExtension extends DataExtension
+class Product extends DataExtension
 {
-
     public function updateCMSFields(FieldList $fields)
     {
-
         // if there are Models set in the Product Category then use a dropdown to select
         if ($this->owner->Parent && $this->owner->Parent->ProductModels()->count()) {
             $fields->replaceField(
                 'Model',
                 DropdownField::create(
                     'Model',
-                    _t("Product.MODELREQUIRED", "Model (required)"),
+                    _t(self::class . 'ModelRequired', 'Model (required)'),
                     ArrayLib::valuekey($this->owner->Parent->ProductModels()->column('Title'))
                 )
-                    ->setEmptyString(_t("Product.MODELSELECT", "Select..."))
+                    ->setEmptyString(_t(self::class . 'ModelSelect', 'Select...'))
                     ->setAttribute('Required', true)
             );
         } else {
-
             // Update Model for extended length
             // see config.yml for updated db settings
             $model = $fields->dataFieldByName('Model');

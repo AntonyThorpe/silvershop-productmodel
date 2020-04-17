@@ -1,14 +1,19 @@
 <?php
 
+namespace AntonyThorpe\SilverShopProductModel\Tests;
+
+use Exception;
+use SilverShop\Page\ProductCategory;
+use AntonyThorpe\SilverShopProductModel\ProductModel;
+use SilverStripe\Dev\SapphireTest;
+
 class SilvershopProductModelModelTest extends SapphireTest
 {
-    protected static $fixture_file   = 'silvershop/tests/fixtures/shop.yml';
-    protected static $disable_theme  = true;
-    protected static $use_draft_site = true;
+    protected static $fixture_file = 'vendor/silvershop/core/tests/php/Fixtures/shop.yml';
 
     public function testNew()
     {
-        $product_category = $this->objFromFixture("ProductCategory", "electronics");
+        $product_category = $this->objFromFixture(ProductCategory::class, "electronics");
         $new_product_model = new ProductModel(
             array(
                 'Title' => 'Freighter',
@@ -40,7 +45,7 @@ class SilvershopProductModelModelTest extends SapphireTest
     public function testRequiredFields()
     {
         // create an instance that lacks the required Title field
-        $product_category = $this->objFromFixture("ProductCategory", "electronics");
+        $product_category = $this->objFromFixture(ProductCategory::class, "electronics");
         $new_product_model = new ProductModel(
             array(
                 //'Title' => 'Freighter',
@@ -59,13 +64,11 @@ class SilvershopProductModelModelTest extends SapphireTest
             "ProductModel should not be writable, since it doesn't contain the required Title field"
         );
 
-        // create an instance that lacks the required ProductCategoryID field
-        $product_category = $this->objFromFixture("ProductCategory", "electronics");
+        // create an instance that lacks the required ProductCategoryID field to test error
         $new_product_model = new ProductModel(
             array(
                 'Title' => 'Freighter',
-                'Description' => 'Transportation across the Galaxy',
-                //'ProductCategoryID' => $product_category->ID
+                'Description' => 'Transportation across the Galaxy'
             )
         );
         $writeFailed = false;

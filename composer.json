@@ -1,20 +1,30 @@
 {
 	"name": "antonythorpe/silvershop-productmodel",
-	"description": "Silvershop submodule that provides product model management under ProductCategory pages",
-	"type": "silverstripe-module",
-	"keywords": ["Silverstripe", "Silvershop", "ecommerce", "product model", "model"],
-	"extra": {
-		"installer-name": "silvershop-productmodel",
-		"branch-alias": {
-			"dev-master": "2.*-dev"
-		}
-	},
+	"description": "SilverShop submodule that provides product model management under ProductCategory pages",
+	"type": "silverstripe-vendormodule",
+	"keywords": ["Silverstripe", "SilverShop", "ecommerce", "product model", "model"],
+    "license": "MIT",
 	"require": {
-		"silvershop/core": "^2.0",
-		"silverstripe-australia/gridfieldextensions": "*"
+		"silvershop/core": "^3.0",
+		"symbiote/silverstripe-gridfieldextensions": "*",
+        "silverstripe/vendor-plugin": "^1"
 	},
-	"license": "MIT",
 	"require-dev": {
-		"phpunit/PHPUnit": "3.7.*@stable"
+		"phpunit/phpunit": "^5.7"
+	},
+    "autoload": {
+        "psr-4": {
+            "AntonyThorpe\\SilverShopProductModel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AntonyThorpe\\SilverShopProductModel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+		"branch-alias": {
+			"dev-master": "3.*-dev"
+		}
 	}
 }

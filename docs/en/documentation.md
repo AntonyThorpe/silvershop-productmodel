@@ -1,12 +1,12 @@
-# Documentation of Silvershop Product Model
+# Documentation of SilverShop Product Model
 
 ## CMS
-In the CMS open a Product Category page.  Click the model tab and add a list of product models.  Drag and drop to re-order.
+In the CMS open a Product Category page.  Click the `Model` tab and add a list of product models.  Drag and drop to re-order.
 
-In any new child page, a dropdown is available to pick the appropriate Model.
+In any new child page, a dropdown is available to pick the appropriate model.
 
-## Templates
-Loop over `$GroupedProductsByModel` in a template.  Below is an example:
+## Product Category Template
+Loop over `$GroupedProductsByModel`.  Example below:
 ```html
 <% if $ProductModels %>
     <% loop $GroupedProductsByModel.GroupedBy(Model) %>
@@ -16,7 +16,7 @@ Loop over `$GroupedProductsByModel` in a template.  Below is an example:
                     <h2>$Model<% if $ModelDescription %> - $ModelDescription<% end_if %></h2>
                 </div>
             <% end_if %>
-            <% include ProductGroupItem %>
+            <% include SilverShop\Includes\ProductGroupItem %>
         <% end_loop %>
     <% end_loop %>
 <% end_if %>

@@ -1,12 +1,12 @@
 ---
 Name: silvershop-productmodel
-After: silvershop/config#shopconfig
+After: '#silvershop-config'
 ---
-Product:
+SilverShop\Page\Product:
   db:
-    Model: 'Varchar(100)'
+    Model: Varchar(100)
   extensions:
-   - ProductModelExtension
-ProductCategory:
+    - AntonyThorpe\SilverShopProductModel\Product
+SilverShop\Page\ProductCategory:
   extensions:
-   - ProductModelCategoryExtension
+    - AntonyThorpe\SilverShopProductModel\ProductCategory

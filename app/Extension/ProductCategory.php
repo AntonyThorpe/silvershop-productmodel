@@ -1,40 +1,52 @@
 <?php
+
+namespace AntonyThorpe\SilverShopProductModel;
+
+use AntonyThorpe\SilverShopProductModel\ProductModel;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\GroupedList;
+use SilverStripe\ORM\DataExtension;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+
 /**
- * Extend Product Category to enable the adding of Models
- *
- * @package ProductCategory
+ * Extends SilverShop\Page\ProductCategory to enable the adding of Models
  */
-class ProductModelCategoryExtension extends DataExtension
+class ProductCategory extends DataExtension
 {
     private static $has_many = array (
-        'ProductModels' => 'ProductModel'
+        'ProductModels' => ProductModel::class
     );
 
     public function updateCMSFields(FieldList $fields)
     {
         $fields->addFieldToTab(
-            "Root." . _t('ProductCategory.MODELS', 'Models'),
+            'Root.' . _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
             HeaderField::create(
-                "ModelHeading",
-                _t("ProductCategory.MODELSHEADING", "Specify the models for this Product Category")
+                'ModelHeading',
+                _t(\SilverShop\Page\ProductCategory::class . 'ModelsHeading', 'Specify the models for this Product Category')
             )
         );
         $fields->addFieldToTab(
-            "Root." . _t('ProductCategory.MODELS', 'Models'),
+            'Root.' . _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
             LabelField::create(
-                "ModelLabel",
+                'ModelLabel',
                 _t(
-                    "ProductCategory.MODELSLABEL",
+                    \SilverShop\Page\ProductCategory::class . "ModelsLabel",
                     "The below entries determine the order of Models, and their associated products, on the Product Category Pages.  Also, sets the Models to appear in dropdown on each Product's page."
                 )
             )
         );
 
         $fields->addFieldToTab(
-            "Root." . _t('ProductCategory.MODELS', 'Models'),
+            'Root.' . _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
             GridField::create(
                 'Models',
-                _t("ProductCategory.MODELS", "Models"),
+                _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
                 $this->owner->ProductModels()->sort('Sort', 'ASC'),
                 $config = GridFieldConfig_RecordEditor::create()
             )
