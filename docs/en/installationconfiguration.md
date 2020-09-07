@@ -3,5 +3,3 @@
 ## Installation
 In a terminal
 `composer require antonythorpe/silvershop-productmodel`
-
-## Configuration

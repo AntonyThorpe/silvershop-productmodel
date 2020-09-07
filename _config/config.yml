@@ -6,7 +6,7 @@ SilverShop\Page\Product:
   db:
     Model: Varchar(100)
   extensions:
-    - AntonyThorpe\SilverShopProductModel\Product
+    - AntonyThorpe\SilverShopProductModel\ProductExtension
 SilverShop\Page\ProductCategory:
   extensions:
-    - AntonyThorpe\SilverShopProductModel\ProductCategory
+    - AntonyThorpe\SilverShopProductModel\ProductCategoryExtension

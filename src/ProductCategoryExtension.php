@@ -4,19 +4,19 @@ namespace AntonyThorpe\SilverShopProductModel;
 
 use AntonyThorpe\SilverShopProductModel\ProductModel;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\LabelField;
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
-use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\GroupedList;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\GroupedList;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 /**
  * Extends SilverShop\Page\ProductCategory to enable the adding of Models
  */
-class ProductCategory extends DataExtension
+class ProductCategoryExtension extends DataExtension
 {
     private static $has_many = array (
         'ProductModels' => ProductModel::class

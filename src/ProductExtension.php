@@ -11,7 +11,7 @@ use SilverStripe\ORM\DataExtension;
  * Add model dropdown to Product where available
  * Extends SilverShop\Page\Product
  */
-class Product extends DataExtension
+class ProductExtension extends DataExtension
 {
     public function updateCMSFields(FieldList $fields)
     {

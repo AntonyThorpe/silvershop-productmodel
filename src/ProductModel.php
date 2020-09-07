@@ -1,17 +1,16 @@
 <?php
-
-namespace AntonyThorpe\SilverShopProductModel;
-
-use SilverShop\Page\ProductCategory;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\DataObject;
-
 /**
  * Create Product Models in the Product Category and use these for the dropdown when editing a product
  * (instead of a textfield).
  * In addition, loop over the models on the Product Category Page
  */
+namespace AntonyThorpe\SilverShopProductModel;
+
+use SilverShop\Page\ProductCategory;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\DataObject;
+
 class ProductModel extends DataObject
 {
     private static $db = array(
