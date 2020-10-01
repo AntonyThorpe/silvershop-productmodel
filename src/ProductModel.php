@@ -27,7 +27,7 @@ class ProductModel extends DataObject
         'Title'
     );
 
-    private static $table_name = 'AntonyThorpe_SilverShopProductModel_ProductModel';
+    private static $table_name = 'SilverShop_ProductModel';
 
     public function getCMSFields()
     {
