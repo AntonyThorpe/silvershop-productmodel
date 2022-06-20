@@ -1,7 +1,7 @@
 # silvershop-productmodel
 SilverShop submodule that provides product model management under ProductCategory pages
 
-[![Build Status](https://travis-ci.org/AntonyThorpe/silvershop-productmodel.svg?branch=master)](https://travis-ci.org/AntonyThorpe/silvershop-productmodel)
+[![CI](https://github.com/AntonyThorpe/silvershop-productmodel/actions/workflows/ci.yml/badge.svg)](https://github.com/AntonyThorpe/silvershop-productmodel/actions/workflows/ci.yml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/antonythorpe/silvershop-productmodel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/antonythorpe/silvershop-productmodel/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/antonythorpe/silvershop-productmodel/v/stable)](https://packagist.org/packages/antonythorpe/silvershop-productmodel)
 [![Total Downloads](https://poser.pugx.org/antonythorpe/silvershop-productmodel/downloads)](https://packagist.org/packages/antonythorpe/silvershop-productmodel)
