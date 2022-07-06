@@ -5,9 +5,7 @@
 	"keywords": ["Silverstripe", "SilverShop", "ecommerce", "product model", "model"],
     "license": "MIT",
 	"require": {
-		"silvershop/core": "^3.0",
-		"symbiote/silverstripe-gridfieldextensions": "*",
-        "silverstripe/vendor-plugin": "^1"
+		"silvershop/core": "^3.0"
 	},
     "autoload": {
         "psr-4": {
