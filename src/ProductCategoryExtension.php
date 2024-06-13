@@ -2,6 +2,7 @@
 
 namespace AntonyThorpe\SilverShopProductModel;
 
+use SilverShop\Page\ProductCategory;
 use AntonyThorpe\SilverShopProductModel\ProductModel;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
@@ -18,42 +19,45 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
  */
 class ProductCategoryExtension extends DataExtension
 {
-    private static $has_many = array (
+    /**
+     * @config
+     */
+    private static array $has_many = [
         'ProductModels' => ProductModel::class
-    );
+    ];
 
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): void
     {
         $fields->addFieldToTab(
-            'Root.' . _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
+            'Root.' . _t(ProductCategory::class . 'Models', 'Models'),
             HeaderField::create(
                 'ModelHeading',
-                _t(\SilverShop\Page\ProductCategory::class . 'ModelsHeading', 'Specify the models for this Product Category')
+                _t(ProductCategory::class . 'ModelsHeading', 'Specify the models for this Product Category')
             )
         );
         $fields->addFieldToTab(
-            'Root.' . _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
+            'Root.' . _t(ProductCategory::class . 'Models', 'Models'),
             LabelField::create(
                 'ModelLabel',
                 _t(
-                    \SilverShop\Page\ProductCategory::class . "ModelsLabel",
+                    ProductCategory::class . "ModelsLabel",
                     "The below entries determine the order of Models, and their associated products, on the Product Category Pages.  Also, sets the Models to appear in dropdown on each Product's page."
                 )
             )
         );
 
         $fields->addFieldToTab(
-            'Root.' . _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
+            'Root.' . _t(ProductCategory::class . 'Models', 'Models'),
             GridField::create(
                 'Models',
-                _t(\SilverShop\Page\ProductCategory::class . 'Models', 'Models'),
-                $this->owner->ProductModels()->sort('Sort', 'ASC'),
+                _t(ProductCategory::class . 'Models', 'Models'),
+                $this->getOwner()->ProductModels()->sort('Sort', 'ASC'),
                 $config = GridFieldConfig_RecordEditor::create()
             )
         );
         // Add reorder capabilties
-        if ($this->owner->ProductModels()->count() >= 2) {
-            $config->addComponent(new GridFieldOrderableRows('Sort'));
+        if ($this->getOwner()->ProductModels()->count() >= 2) {
+            $config->addComponent(GridFieldOrderableRows::create('Sort'));
         }
     }
 
@@ -63,10 +67,10 @@ class ProductCategoryExtension extends DataExtension
      */
     public function getGroupedProductsByModel()
     {
-        $list = $this->owner->ProductsShowable();
-        $sortedList = new ArrayList();
+        $list = $this->getOwner()->ProductsShowable();
+        $sortedList = ArrayList::create();
 
-        foreach ($this->owner->ProductModels()->sort('Sort') as $model) {
+        foreach ($this->getOwner()->ProductModels()->sort('Sort') as $model) {
             foreach ($list as $product) {
                 if ($product->Model == $model->Title) {
                     $sortedList->push($product);

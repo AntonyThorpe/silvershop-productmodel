@@ -1,5 +1,0 @@
-mappings:
-  ProductModelCategoryExtension: AntonyThorpe\SilverShopProductModel\ProductCategoryExtension
-  ProductModelExtension: AntonyThorpe\SilverShopProductModel\ProductExtension
-  ProductModel: AntonyThorpe\SilverShopProductModel\ProductModel
-  SilvershopProductModelModelTest: AntonyThorpe\SilverShopProductModel\Tests\SilvershopProductModelModelTest

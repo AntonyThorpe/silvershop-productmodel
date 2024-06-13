@@ -13,16 +13,16 @@ use SilverStripe\ORM\DataExtension;
  */
 class ProductExtension extends DataExtension
 {
-    public function updateCMSFields(FieldList $fields)
+    public function updateCMSFields(FieldList $fields): void
     {
         // if there are Models set in the Product Category then use a dropdown to select
-        if ($this->owner->Parent && $this->owner->Parent->ProductModels()->count()) {
+        if ($this->getOwner()->Parent && $this->getOwner()->Parent->ProductModels()->count()) {
             $fields->replaceField(
                 'Model',
                 DropdownField::create(
                     'Model',
                     _t(self::class . 'ModelRequired', 'Model (required)'),
-                    ArrayLib::valuekey($this->owner->Parent->ProductModels()->column('Title'))
+                    ArrayLib::valuekey($this->getOwner()->Parent->ProductModels()->column('Title'))
                 )
                     ->setEmptyString(_t(self::class . 'ModelSelect', 'Select...'))
                     ->setAttribute('Required', true)
@@ -39,11 +39,15 @@ class ProductExtension extends DataExtension
      * For the template within the GroupedList, provide the model's Description recorded within the ProductModel Class
      * @return string description of the model
      */
-    public function getModelDescription()
+    public function getModelDescription(): string|null
     {
-        $productmodels = $this->owner->Parent->ProductModels();
-        if ($productmodels->count() && $model = $this->owner->Model) {
-            return $productmodels->find('Title', $model)->Description;
+        if ($this->getOwner()->Parent) {
+            $productmodels = $this->getOwner()->Parent->ProductModels();
+            if ($productmodels->count() && $this->getOwner()->Model) {
+                $model = $this->getOwner()->Model;
+                return $productmodels->find('Title', $model)->Description;
+            }
         }
+        return null;
     }
 }

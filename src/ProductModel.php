@@ -13,21 +13,31 @@ use SilverStripe\ORM\DataObject;
 
 class ProductModel extends DataObject
 {
-    private static $db = array(
+    /**
+     * @config
+     */
+    private static array $db = [
         'Title' => 'Varchar(100)',
         'Description' => 'Varchar(255)',
         'Sort' => 'Int'
-    );
+    ];
 
-    private static $has_one = array(
+    /**
+     * @config
+     */
+    private static array $has_one = [
         'ProductCategory' => ProductCategory::class
-    );
+    ];
 
-    private static $required_fields = array(
-        'Title'
-    );
+    /**
+     * @config
+     */
+    private static array $required_fields = ['Title'];
 
-    private static $table_name = 'SilverShop_ProductModel';
+    /**
+     * @config
+     */
+    private static string $table_name = 'SilverShop_ProductModel';
 
     public function getCMSFields()
     {

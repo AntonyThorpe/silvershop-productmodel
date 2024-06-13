@@ -11,16 +11,10 @@ class SilvershopProductModelModelTest extends SapphireTest
 {
     protected static $fixture_file = 'vendor/silvershop/core/tests/php/Fixtures/shop.yml';
 
-    public function testNew()
+    public function testNew(): void
     {
         $product_category = $this->objFromFixture(ProductCategory::class, "electronics");
-        $new_product_model = new ProductModel(
-            array(
-                'Title' => 'Freighter',
-                'Description' => 'Transportation across the Galaxy',
-                'ProductCategoryID' => $product_category->ID
-            )
-        );
+        $new_product_model = ProductModel::create(['Title' => 'Freighter', 'Description' => 'Transportation across the Galaxy', 'ProductCategoryID' => $product_category->ID]);
         $id = $new_product_model->write();
 
         $product_model = ProductModel::get()->byID($id);
@@ -36,23 +30,21 @@ class SilvershopProductModelModelTest extends SapphireTest
             'The Description is Transportation across the Galaxy'
         );
         $this->assertSame(
-            $product_category->ID,
-            (int) $product_model->ProductCategoryID,
+            (int) $product_category->ID,
+            $product_model->ProductCategoryID,
             'The ProductCategoryID is ' . $product_category->ID
         );
     }
 
-    public function testRequiredFields()
+    public function testRequiredFields(): void
     {
         // create an instance that lacks the required Title field
         $product_category = $this->objFromFixture(ProductCategory::class, "electronics");
-        $new_product_model = new ProductModel(
-            array(
-                //'Title' => 'Freighter',
-                'Description' => 'Transportation across the Galaxy',
-                'ProductCategoryID' => $product_category->ID
-            )
-        );
+        $new_product_model = ProductModel::create([
+            //'Title' => 'Freighter',
+            'Description' => 'Transportation across the Galaxy',
+            'ProductCategoryID' => $product_category->ID,
+        ]);
         $writeFailed = false;
         try {
             $new_product_model->write();
@@ -65,16 +57,11 @@ class SilvershopProductModelModelTest extends SapphireTest
         );
 
         // create an instance that lacks the required ProductCategoryID field to test error
-        $new_product_model = new ProductModel(
-            array(
-                'Title' => 'Freighter',
-                'Description' => 'Transportation across the Galaxy'
-            )
-        );
+        $new_product_model = ProductModel::create(['Title' => 'Freighter', 'Description' => 'Transportation across the Galaxy']);
         $writeFailed = false;
         try {
             $new_product_model->write();
-        } catch (Exception $ex) {
+        } catch (Exception) {
             $writeFailed = true;
         }
         $this->assertTrue(
