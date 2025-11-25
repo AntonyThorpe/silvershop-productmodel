@@ -1,7 +1,0 @@
----
-Name: silvershop-productmodel-legacy
----
-# Mapping rules to map old model-classes to new ones.
-SilverStripe\ORM\DatabaseAdmin:
-  classname_value_remapping:
-    ProductModel: AntonyThorpe\SilverShopProductModel\ProductModel
