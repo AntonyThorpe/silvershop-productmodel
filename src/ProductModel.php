@@ -7,10 +7,18 @@
 namespace AntonyThorpe\SilverShopProductModel;
 
 use SilverShop\Page\ProductCategory;
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 
+/**
+ * @property string $Title
+ * @property ?string $Description
+ * @property int $Sort
+ * @property int $ProductCategoryID
+ * @method ProductCategory ProductCategory()
+ */
 class ProductModel extends DataObject
 {
     /**
@@ -50,12 +58,12 @@ class ProductModel extends DataObject
         );
     }
 
-    public function validate()
+    public function validate(): ValidationResult
     {
-        $result = parent::validate();
+        $validationResult = parent::validate();
 
         if (empty($this->Title)) {
-            $result->addError(
+            $validationResult->addError(
                 _t(
                     self::class . 'ValidationMessageTitle',
                     'ProductModel Class validation - missing the Model Title field'
@@ -64,7 +72,7 @@ class ProductModel extends DataObject
         }
 
         if (empty($this->ProductCategoryID)) {
-            $result->addError(
+            $validationResult->addError(
                 _t(
                     self::class . 'ValidationMessageProductCategoryID',
                     'ProductModel Class validation - missing ProductCategoryID field'
@@ -72,6 +80,6 @@ class ProductModel extends DataObject
             );
         }
 
-        return $result;
+        return $validationResult;
     }
 }

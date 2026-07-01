@@ -2,22 +2,24 @@
 
 namespace AntonyThorpe\SilverShopProductModel;
 
-use SilverStripe\Forms\FieldList;
-use SilverStripe\ORM\ArrayLib;
+use SilverShop\Page\Product;
+use SilverStripe\Core\ArrayLib;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\DropdownField;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Add model dropdown to Product where available
  * Extends SilverShop\Page\Product
+ * @extends Extension<(Product & static)>
  */
-class ProductExtension extends DataExtension
+class ProductExtension extends Extension
 {
-    public function updateCMSFields(FieldList $fields): void
+    public function updateCMSFields(FieldList $fieldList): void
     {
         // if there are Models set in the Product Category then use a dropdown to select
         if ($this->getOwner()->Parent && $this->getOwner()->Parent->ProductModels()->count()) {
-            $fields->replaceField(
+            $fieldList->replaceField(
                 'Model',
                 DropdownField::create(
                     'Model',
@@ -30,8 +32,10 @@ class ProductExtension extends DataExtension
         } else {
             // Update Model for extended length
             // see config.yml for updated db settings
-            $model = $fields->dataFieldByName('Model');
-            $model->setMaxLength(100);
+            $model = $fieldList->dataFieldByName('Model');
+            if (method_exists($model, 'setMaxLength')) {
+                $model->setMaxLength(100);
+            }
         }
     }
 
@@ -48,6 +52,7 @@ class ProductExtension extends DataExtension
                 return $productmodels->find('Title', $model)->Description;
             }
         }
+
         return null;
     }
 }
